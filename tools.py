@@ -4,6 +4,8 @@ from scipy import linalg
 from sklearn.preprocessing import normalize
 from sklearn.cluster import KMeans
 
+#defining spectral clustering for given num_of_clusters=k and weighted matrix W
+
 def normalised_L_sym(k,W):
     d=W.sum(axis=1)
     d=d**(-1/2)
@@ -37,7 +39,7 @@ def unnormalised(k,W):
     y_pred = KMeans(n_clusters=k).fit_predict(U)
     return y_pred
 
-def rate(y_test, y_pred):
+def rate(y_test, y_pred): #calculate rate of predictions
     rate=np.array([ (y_test[i]-y_pred[i]==0) for i in range(len(y_test))])
     return np.mean(rate)
 
