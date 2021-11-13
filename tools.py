@@ -2,7 +2,6 @@ import numpy as np
 from scipy.spatial import distance
 from scipy import linalg
 from sklearn.preprocessing import normalize
-from scipy.stats import  norm
 from sklearn.cluster import KMeans
 
 def normalised_L_sym(k,W):
