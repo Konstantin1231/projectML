@@ -1,3 +1,5 @@
+import itertools
+
 import numpy as np
 from scipy.spatial import distance
 from scipy import linalg
@@ -119,6 +121,28 @@ def correcting_labels(y_pred,y_test):
 
     k=np.where(rates_==np.amax(rates_))
     return Y[k,:]
+
+
+def best_rate(truth, y, k):
+    max_rate = rate(truth, y)
+
+    # Split into label-belonging matrix
+    label_belong = np.zeros((k, len(y)))
+    for i in range(k):
+        label_belong[i, :] = (y == i)
+
+    # Test all label-permutations
+    labels = np.cumsum(np.ones(k))-1
+    for perm in itertools.permutations(labels):
+        test = np.zeros(len(y))
+        for i in range(k):
+            test += perm[i] * label_belong[i, :]
+        max_rate = max(max_rate, rate(truth, test))
+
+    return max_rate
+
+
+
 
 
 
