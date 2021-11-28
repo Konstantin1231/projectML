@@ -37,8 +37,8 @@ def main():
     X = np.append(X1, X2, axis=1)  # unsupervised data
     X = np.transpose(X)
 
-    Y_test = np.ones(N1)
-    Y_test = np.append(Y_test, np.zeros(N2))  # corresponding labels
+    Y_test = np.zeros(N1)
+    Y_test = np.append(Y_test, np.ones(N2))  # corresponding labels
 
     ax2 = fig.add_subplot(122)
     ax2.scatter(X[:, 0], X[:, 1])
@@ -72,7 +72,7 @@ def main():
     # normalised decomposition of L_sym
     y = normalised_L_sym(2, W)
     ax1.scatter(X[:, 0], X[:, 1], c=y)
-    string = 'normalised L_sym ' + 'rate=' + str(rate(Y_test, y))
+    string = f"normalised L_sym best_rate={best_rate(Y_test, y, 2)}"
     ax1.set_title(string)
 
     # normalised decomposition of L_rw
